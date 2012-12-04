@@ -390,12 +390,14 @@ class Formatter
 		// let's get the config file
 		$config = Config::get('formatter::format.csv');
 
-		$rows = preg_split('/(?<='.preg_quote(Config::get('format.csv.enclosure', '"')).')'.Config::get('format.csv.regex_newline', '\n').'/', trim($string));
+		$rows = preg_split('/(?<='.preg_quote(Config::get('formatter::format.csv.enclosure', '"')).')'.Config::get('formatter::format.csv.regex_newline', '\n').'/', trim($string));
 
 		// csv config
-		$delimiter = array_get($config, 'delimiter', ",");
+		$delimiter = array_get($config, 'delimiter', ";");
 		$enclosure = array_get($config, 'enclosure', '"');
 		$escape = array_get($config, 'escape', "\\");
+
+		\Log::write('info', 'delimiter : <pre><code>' . print_r($delimiter, true).'</code></pre>');
 
 		// Get the headings
 		$headings = str_replace($escape.$enclosure, $enclosure, str_getcsv(array_shift($rows), $delimiter, $enclosure, $escape));
