@@ -10,7 +10,7 @@
  * @version 1.0
  * @author  Daniel Berry <daniel@danielberry.me>
  * @license MIT License (see LICENSE.readme included in the bundle)
- * 
+ *
  */
 
 /**
@@ -29,7 +29,7 @@ class FormatterException extends Exception {}
  *
  * @package  Formatter
  * @author   Daniel Berry <danielberrytn@gmail.com>
- * 
+ *
  */
 class Formatter
 {
@@ -57,7 +57,7 @@ class Formatter
 	 *
 	 * Constructs our class and sets up some vars we will be using throughout
 	 * the conversion process.
-	 * 
+	 *
 	 * @param mixed  $data        data we will be converting
 	 * @param string $from_type  what we are converting form
 	 */
@@ -229,7 +229,7 @@ class Formatter
 		// To allow exporting ArrayAccess objects like Orm\Model instances they need to be
 		// converted to an array first
 		$data = (is_array($data) or is_object($data)) ? $this->to_array($data) : $data;
-		return $pretty ? static::pretty_json($data) : json_encode($data);
+		return $pretty ? static::pretty_json($data) : json_encode($data, JSON_NUMERIC_CHECK);
 	}
 
 	/**
