@@ -136,16 +136,16 @@ class Formatter
 	 * @param   mixed   $delimiter
 	 * @return  string
 	 */
-	public function to_csv($data = null, $delimiter = null)
+	public function to_csv($data = null, $attributes = null)
 	{
 		// let's get the config file
-		$config = Config::get('formatter::format.csv');
+		$config = Config::get('formatter::formatter.csv');
 
 		// csv format settings
-		$newline = array_get($config, 'delimiter', "\n");
-		$delimiter or $delimiter = array_get($config, 'delimiter', ",");
-		$enclosure = array_get($config, 'delimiter', '"');
-		$escape = array_get($config, 'delimiter', "\\");
+		$newline = array_get($attributes, 'newline', array_get($config, 'newline', "\n")));
+		$delimiter or $delimiter = array_get($attributes, 'delimiter', array_get($config, 'delimiter', "\n")));
+		$enclosure = array_get($attributes, 'enclosure', array_get($config, 'enclosure', "\n")));
+		$escape = array_get($attributes, 'escape', array_get($config, 'escape', "\n")));
 
 		// escape function
 		$escaper = function($items) use($enclosure, $escape) {
