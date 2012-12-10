@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xml>
+    <item>
+        <first_name>Daniel</first_name>
+        <last_name>Berry</last_name>
+        <email>danielberrytn@gmail.com</email>
+        <state>TX</state>
+    </item>
+    <item>
+        <first_name>John</first_name>
+        <last_name>Doe</last_name>
+        <email>john.doe@fakepeople.com</email>
+        <state>AL</state>
+    </item>
+    <item>
+        <first_name>Jane</first_name>
+        <last_name>Doe</last_name>
+        <email>jane.doe@fakepeople.com</email>
+        <state>TN</state>
+    </item>
+    <item>
+        <first_name>James</first_name>
+        <last_name>Smith</last_name>
+        <email>james.smith@fakepeople.com</email>
+        <state>OK</state>
+    </item>
+</xml>

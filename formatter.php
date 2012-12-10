@@ -46,9 +46,9 @@ class Formatter
 	 * @param  [type] $from_type what we want to convert to
 	 * @return Formatter
 	 */
-	public static function make($data = null, $from_type = null)
+	public static function make($data = null, $from_type = null, $attributes = array())
 	{
-		return new self($data, $from_type);
+		return new self($data, $from_type, $attributes);
 	}
 
 
@@ -61,7 +61,7 @@ class Formatter
 	 * @param mixed  $data        data we will be converting
 	 * @param string $from_type  what we are converting form
 	 */
-	public function __construct($data = null, $from_type = null)
+	public function __construct($data = null, $from_type = null, $attributes = array())
 	{
 		// make sure we have data to convert to
 		if (empty($data))
@@ -75,7 +75,7 @@ class Formatter
 			// check to make sure the method exists
 			if (method_exists($this, "_from_{$from_type}"))
 			{
-				$data = call_user_func(array($this, '_from_' . $from_type), $data);
+				$data = call_user_func(array($this, '_from_' . $from_type), $data, $attributes);
 			}
 			else
 			{
@@ -142,10 +142,10 @@ class Formatter
 		$config = Config::get('formatter::formatter.csv');
 
 		// csv format settings
-		$newline = array_get($attributes, 'newline', array_get($config, 'newline', "\n")));
-		$delimiter or $delimiter = array_get($attributes, 'delimiter', array_get($config, 'delimiter', "\n")));
-		$enclosure = array_get($attributes, 'enclosure', array_get($config, 'enclosure', "\n")));
-		$escape = array_get($attributes, 'escape', array_get($config, 'escape', "\n")));
+		$newline = array_get($attributes, 'newline', array_get($config, 'newline', "\n"));
+		$delimiter = array_get($attributes, 'delimiter', array_get($config, 'delimiter', ","));
+		$enclosure = array_get($attributes, 'enclosure', array_get($config, 'enclosure', "\""));
+		$escape = array_get($attributes, 'escape', array_get($config, 'escape', '\\'));
 
 		// escape function
 		$escaper = function($items) use($enclosure, $escape) {
@@ -388,14 +388,16 @@ class Formatter
 		$data = array();
 
 		// let's get the config file
-		$config = Config::get('formatter::format.csv');
+		$config = Config::get('formatter::formatter.csv');
 
-		$rows = preg_split('/(?<='.preg_quote(Config::get('format.csv.enclosure', '"')).')'.Config::get('format.csv.regex_newline', '\n').'/', trim($string));
+		// csv format settings
+		$newline = array_get($attributes, 'newline', array_get($config, 'newline', "\n"));
+		$delimiter or $delimiter = array_get($attributes, 'delimiter', array_get($config, 'delimiter', ","));
+		$enclosure = array_get($attributes, 'enclosure', array_get($config, 'enclosure', "\""));
+		$escape = array_get($attributes, 'escape', array_get($config, 'escape', '\\'));
+		$regex_newline = array_get($attributes, 'regex_newline', array_get($config, 'regex_newline', '\n'));
 
-		// csv config
-		$delimiter = array_get($config, 'delimiter', ",");
-		$enclosure = array_get($config, 'enclosure', '"');
-		$escape = array_get($config, 'escape', "\\");
+		$rows = preg_split('/(?<='.preg_quote($enclosure).')'.$regex_newline.'/', trim($string));
 
 		// Get the headings
 		$headings = str_replace($escape.$enclosure, $enclosure, str_getcsv(array_shift($rows), $delimiter, $enclosure, $escape));
@@ -452,5 +454,4 @@ class Formatter
 		}
 		return false;
 	}
-
 }
