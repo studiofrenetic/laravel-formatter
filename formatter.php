@@ -383,7 +383,7 @@ class Formatter
 	 * @param   string  $string
 	 * @return  array
 	 */
-	protected function _from_csv($string)
+	protected function _from_csv($string, $attributes = array())
 	{
 		$data = array();
 
