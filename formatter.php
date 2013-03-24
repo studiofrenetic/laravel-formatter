@@ -392,7 +392,7 @@ class Formatter
 
 		// csv format settings
 		$newline = array_get($attributes, 'newline', array_get($config, 'newline', "\n"));
-		$delimiter or $delimiter = array_get($attributes, 'delimiter', array_get($config, 'delimiter', ","));
+		$delimiter = array_get($attributes, 'delimiter', array_get($config, 'delimiter', ","));
 		$enclosure = array_get($attributes, 'enclosure', array_get($config, 'enclosure', "\""));
 		$escape = array_get($attributes, 'escape', array_get($config, 'escape', '\\'));
 		$regex_newline = array_get($attributes, 'regex_newline', array_get($config, 'regex_newline', '\n'));
