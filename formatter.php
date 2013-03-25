@@ -300,6 +300,13 @@ class Formatter
 
 		foreach ($data as $key => $value)
 		{
+			// convert our booleans to 0/1 integer values so they are
+			// not converted to blanks. 
+			if(is_bool($value))
+			{
+				$value = (int) $value;
+			}
+
 			// no numeric keys in our xml please!
 			if (is_numeric($key))
 			{
