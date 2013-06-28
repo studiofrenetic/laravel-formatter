@@ -1,0 +1,26 @@
+{
+	"name": "hitsend/formatter",
+	"type": "library",
+	"description": "Port of Daniel Berry's Formatter Bundle for Laravel 3, to Laravel 4 using the Composer Package management",
+	"keywords": ["laravel", "formatter"],
+    "homepage": "http://github.com/grahammccarthy/laravel-formatter",
+    "license": "MIT",
+	"authors": [
+		{
+			"name": "Graham McCarthy",
+			"email": "graham@hitsend.ca",
+			"homepage": "http://grahammccarthy.com"
+		}
+	],
+	"require": {
+		"php": ">=5.3.0",
+		"illuminate/support": "4.0.x"
+	},
+	"autoload": {
+		"psr-0": {
+			"Spyc": "vendor/spyc/",
+			"Hitsend\\Formatter": "src/"
+		}
+	},
+	"minimum-stability": "dev"
+}

@@ -1,36 +1,26 @@
 Formatter Bundle
 ================
 
-Laravel Bundle ported from the FuelPHP Format class, that helps you easily convert between various formats such as XML, JSON, CSV, etc...
+Laravel 4 Workbench Package based off the work done by @dberry37388 to create a Laravel 3 Bundle porterd from the FuelPHP Format class.  Thhis class helps you easily convert between various formats such as XML, JSON, CSV, etc...
+
+I've also implemented the error handling code created by @rodrigore
 
 Installation
 ------------
-Using artisan to install the bundle
 
-```
-php artisan bundle:install formatter
-```
+Not exactly sure... I used the Artisan Workbench to create a package in my Laravel 4 instance.
 
-Or you can clone the bundle straight from github. Run the following command inside your bundles folder:
+To learn more about packages read http://laravel.com/docs/packages
 
-```
-git clone git@github.com:dberry37388/laravel-formatter.git formatter
-```
+when you add this to your vendor directory, you will need to run `php artisan dump-autoload`
 
-Add the Following to your application/bundles.php file:
-
-```
-'formatter' => array('auto' => true) // you can leave out the auto => true
-```
-
-That's it, Formatter should now be installed and ready to go!
+I'll try to make this installation better once I get more time.
 
 Usage
 -----
 The best way to learn how to use Formatter is to look through the code, where you can familiarize yourself with all of the available methods.
 
 ###Calling Formatter
-
 Formatter::make($data_to_convert, 'type of data')->to_the_format_you_want();
 
 ### Available Formats to Convert From
@@ -50,7 +40,16 @@ Formatter::make($data_to_convert, 'type of data')->to_the_format_you_want();
 
 ```
 $json_string = '{"foo":"bar","baz":"qux"}';
-print_r(Formater::make($json_string, 'json')->to_array());
+$result = Formater::make($json_string, 'json')->to_array();
+
+if ( empty(Formatter::$errors) ) {
+	//show the results
+	print_r(result);
+} else {
+	// Show the errors
+	print_r(Formatter::$errors);
+	return;
+}
 
 // Returns
 Array

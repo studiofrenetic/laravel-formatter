@@ -16,11 +16,10 @@
 /**
  * Setup the Formatter namespace
  */
-namespace Formatter;
+//namespace Formatter;
+namespace Hitsend\Formatter;
 
-use Config, Exception;
-
-class FormatterException extends Exception {}
+use Config, Lang;
 
 /**
  * The Formatter Class
@@ -31,14 +30,19 @@ class FormatterException extends Exception {}
  * @author   Daniel Berry <danielberrytn@gmail.com>
  *
  */
-class Formatter
-{
+class Formatter {
 
 	/**
 	 * Holds the data that we are converting
 	 * @var array
 	 */
 	protected $_data = array();
+
+	/**
+	 * Holds the errors. For now only works with from_csv
+	 * @var array
+	 */
+	public static $errors = array();
 
 	/**
 	 * Returns an instance of the Formatter Bundle
@@ -64,22 +68,17 @@ class Formatter
 	public function __construct($data = null, $from_type = null, $attributes = array())
 	{
 		// make sure we have data to convert to
-		if (empty($data))
-		{
-			throw new FormatterException(__('formatter::formatter.no_data', array('from_type' => $from_type)));
+		if (!is_array($data) && empty($data)) {
+			array_push(self::$errors, Lang::get('formatter::formatter.no_data', array('from_type' => $from_type)));
 		}
 
 		// make sure our from type has been specified.
-		if ($from_type !== null)
-		{
+		if ($from_type !== null) {
 			// check to make sure the method exists
-			if (method_exists($this, "_from_{$from_type}"))
-			{
+			if (method_exists($this, "_from_{$from_type}")) {
 				$data = call_user_func(array($this, '_from_' . $from_type), $data, $attributes);
-			}
-			else
-			{
-				throw new FormatterException(__('formatter::formatter.from_type_not_supported', array('from_type' => $from_type)));
+			} else {
+				array_push(self::$errors, Lang::get('formatter::formatter.from_type_not_supported', array('from_type' => $from_type)));
 			}
 		}
 
@@ -97,31 +96,24 @@ class Formatter
 	 */
 	public function to_array($data = null)
 	{
-		if ($data === null)
-		{
+		if ($data === null) {
 			$data = $this->_data;
 		}
 
 		$array = array();
 
-		if (is_object($data) and ! $data instanceof \Iterator)
-		{
+		if (is_object($data) and ! $data instanceof \Iterator) {
 			$data = get_object_vars($data);
 		}
 
-		if (empty($data))
-		{
+		if (empty($data)) {
 			return array();
 		}
 
-		foreach ($data as $key => $value)
-		{
-			if (is_object($value) or is_array($value))
-			{
+		foreach ($data as $key => $value) {
+			if (is_object($value) or is_array($value)) {
 				$array[$key] = $this->to_array($value);
-			}
-			else
-			{
+			} else {
 				$array[$key] = $value;
 			}
 		}
@@ -136,8 +128,8 @@ class Formatter
 	 * @param   mixed   $delimiter
 	 * @return  string
 	 */
-	public function to_csv($data = null, $attributes = null)
-	{
+	public function to_csv($data = null, $attributes = null) {
+
 		// let's get the config file
 		$config = Config::get('formatter::formatter.csv');
 
@@ -154,41 +146,33 @@ class Formatter
 			}, $items);
 		};
 
-		if ($data === null)
-		{
+		if ($data === null) {
 			$data = $this->_data;
 		}
 
-		if (is_object($data) and ! $data instanceof \Iterator)
-		{
+		if (is_object($data) and ! $data instanceof \Iterator) {
 			$data = $this->to_array($data);
 		}
 
 		// Multi-dimensional array
-		if (is_array($data) and self::is_multi($data))
-		{
+		if (is_array($data) and self::is_multi($data)) {
 			$data = array_values($data);
 
-			if (self::is_assoc($data[0]))
-			{
+			if (self::is_assoc($data[0])) {
 				$headings = array_keys($data[0]);
-			}
-			else
-			{
+			} else {
 				$headings = array_shift($data);
 			}
 		}
 		// Single array
-		else
-		{
+		else {
 			$headings = array_keys((array) $data);
 			$data = array($data);
 		}
 
 		$output = $enclosure.implode($enclosure.$delimiter.$enclosure, $escaper($headings)).$enclosure.$newline;
 
-		foreach ($data as $row)
-		{
+		foreach ($data as $row) {
 			$output .= $enclosure.implode($enclosure.$delimiter.$enclosure, $escaper((array) $row)).$enclosure.$newline;
 		}
 
@@ -202,10 +186,8 @@ class Formatter
 	 * @param   mixed  $data
 	 * @return  string
 	 */
-	public function to_serialized($data = null)
-	{
-		if ($data == null)
-		{
+	public function to_serialized($data = null) {
+		if ($data == null) {
 			$data = $this->_data;
 		}
 
@@ -219,10 +201,8 @@ class Formatter
 	 * @param   bool   wether to make the json pretty
 	 * @return  string
 	 */
-	public function to_json($data = null, $pretty = false)
-	{
-		if ($data == null)
-		{
+	public function to_json($data = null, $pretty = false) {
+		if ($data == null) {
 			$data = $this->_data;
 		}
 
@@ -238,10 +218,8 @@ class Formatter
 	 * @param   mixed  $data
 	 * @return  string
 	 */
-	public function to_php($data = null)
-	{
-		if ($data == null)
-		{
+	public function to_php($data = null) {
+		if ($data == null) {
 			$data = $this->_data;
 		}
 
@@ -254,10 +232,8 @@ class Formatter
 	 * @param   mixed   $data
 	 * @return  string
 	 */
-	public function to_yaml($data = null)
-	{
-		if ($data == null)
-		{
+	public function to_yaml($data = null) {
+		if ($data == null) {
 			$data = $this->_data;
 		}
 
@@ -274,42 +250,34 @@ class Formatter
 	 * @param   null|string  $basenode
 	 * @return  string
 	 */
-	public function to_xml($data = null, $structure = null, $basenode = 'xml')
-	{
-		if ($data == null)
-		{
+	public function to_xml($data = null, $structure = null, $basenode = 'xml') {
+		if ($data == null) {
 			$data = $this->_data;
 		}
 
 		// turn off compatibility mode as simple xml throws a wobbly if you don't.
-		if (ini_get('zend.ze1_compatibility_mode') == 1)
-		{
+		if (ini_get('zend.ze1_compatibility_mode') == 1) {
 			ini_set('zend.ze1_compatibility_mode', 0);
 		}
 
-		if ($structure == null)
-		{
+		if ($structure == null) {
 			$structure = simplexml_load_string("<?xml version='1.0' encoding='utf-8'?><$basenode />");
 		}
 
 		// Force it to be something useful
-		if ( ! is_array($data) and ! is_object($data))
-		{
+		if ( ! is_array($data) and ! is_object($data)) {
 			$data = (array) $data;
 		}
 
-		foreach ($data as $key => $value)
-		{
+		foreach ($data as $key => $value) {
 			// convert our booleans to 0/1 integer values so they are
-			// not converted to blanks. 
-			if(is_bool($value))
-			{
+			// not converted to blanks.
+			if(is_bool($value)) {
 				$value = (int) $value;
 			}
 
 			// no numeric keys in our xml please!
-			if (is_numeric($key))
-			{
+			if (is_numeric($key)) {
 				// make string key...
 				$key = (\Str::singular($basenode) != $basenode) ? \Str::singular($basenode) : 'item';
 			}
@@ -318,19 +286,14 @@ class Formatter
 			$key = preg_replace('/[^a-z_\-0-9]/i', '', $key);
 
 			// if there is another array found recrusively call this function
-			if (is_array($value) or is_object($value))
-			{
+			if (is_array($value) or is_object($value)) {
 				$node = $structure->addChild($key);
 
 				// recursive call if value is not empty
-				if( ! empty($value))
-				{
+				if( ! empty($value)) {
 					$this->to_xml($value, $node, $key);
 				}
-			}
-
-			else
-			{
+			} else {
 				// add single node.
 				$value = htmlspecialchars(html_entity_decode($value, ENT_QUOTES, 'UTF-8'), ENT_QUOTES, "UTF-8");
 
@@ -348,8 +311,7 @@ class Formatter
 	 * @param   string  $string
 	 * @return  mixed
 	 */
-	private function _from_json($string)
-	{
+	private function _from_json($string) {
 		return json_decode(trim($string));
 	}
 
@@ -359,8 +321,7 @@ class Formatter
 	 * @param   string  $string
 	 * @return  mixed
 	 */
-	private function _from_serialize($string)
-	{
+	private function _from_serialize($string) {
 		return unserialize(trim($string));
 	}
 
@@ -370,14 +331,12 @@ class Formatter
 	 * @param   string  $string
 	 * @return  array
 	 */
-	protected function _from_xml($string)
-	{
+	protected function _from_xml($string) {
 		$_arr = is_string($string) ? simplexml_load_string($string, 'SimpleXMLElement', LIBXML_NOCDATA) : $string;
 		$arr = array();
 
 		// Convert all objects SimpleXMLElement to array recursively
-		foreach ((array)$_arr as $key => $val)
-		{
+		foreach ((array)$_arr as $key => $val) {
 			$arr[$key] = (is_array($val) or is_object($val)) ? $this->_from_xml($val) : $val;
 		}
 
@@ -390,8 +349,7 @@ class Formatter
 	 * @param   string  $string
 	 * @return  array
 	 */
-	protected function _from_csv($string, $attributes = array())
-	{
+	protected function _from_csv($string, $attributes = array()) {
 		$data = array();
 
 		// let's get the config file
@@ -409,15 +367,16 @@ class Formatter
 		// Get the headings
 		$headings = str_replace($escape.$enclosure, $enclosure, str_getcsv(array_shift($rows), $delimiter, $enclosure, $escape));
 
-		foreach ($rows as $row)
-		{
+		foreach ($rows as $row) {
 			$data_fields = str_replace($escape.$enclosure, $enclosure, str_getcsv($row, $delimiter, $enclosure, $escape));
 
-			if (count($data_fields) == count($headings))
-			{
+			if (count($data_fields) > count($headings)) {
+				array_push(self::$errors, Lang::get('formatter::formatter.more_data', array('line_number' => $line_number ) ));
+			} else if (count($data_fields) < count($headings)) {
+				array_push(self::$errors, Lang::get('formatter::formatter.less_data', array('line_number' => $line_number ) ));
+			} else {
 				$data[] = array_combine($headings, $data_fields);
 			}
-
 		}
 
 		return $data;
@@ -431,8 +390,7 @@ class Formatter
 	 * @param   array  $all_keys  if true, check that all elements are arrays
 	 * @return  bool   true if its a multidimensional array, false if not
 	 */
-	protected static function is_multi($arr, $all_keys = false)
-	{
+	protected static function is_multi($arr, $all_keys = false) {
 		$values = array_filter($arr, 'is_array');
 		return $all_keys ? count($arr) === count($values) : count($values) > 0;
 	}
@@ -443,19 +401,15 @@ class Formatter
 	 * @param   array  $arr  the array to check
 	 * @return  bool   true if its an assoc array, false if not
 	 */
-	public static function is_assoc($arr)
-	{
-		if ( ! is_array($arr))
-		{
-			throw new FormatterException('The parameter must be an array.');
+	public static function is_assoc($arr) {
+		if ( ! is_array($arr)) {
+			array_push(self::$errors, Lang::get('formatter::formatter.must_be_array'));
 		}
 
 		$counter = 0;
 
-		foreach ($arr as $key => $unused)
-		{
-			if ( ! is_int($key) or $key !== $counter++)
-			{
+		foreach ($arr as $key => $unused) {
+			if ( ! is_int($key) or $key !== $counter++) {
 				return true;
 			}
 		}
