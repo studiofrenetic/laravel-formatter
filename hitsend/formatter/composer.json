@@ -3,7 +3,7 @@
 	"type": "library",
 	"description": "Port of Daniel Berry's Formatter Bundle for Laravel 3, to Laravel 4 using the Composer Package management",
 	"keywords": ["laravel", "formatter"],
-    "homepage": "http://github.com/grahammccarthy/laravel-formatter",
+    "homepage": "http://github.com/hitsend/laravel-formatter",
     "license": "MIT",
 	"authors": [
 		{
