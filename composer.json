@@ -18,7 +18,7 @@
 	},
 	"autoload": {
 		"psr-0": {
-			"Spyc": "vendor/spyc/",
+			"Spyc": "src/spyc/",
 			"Hitsend\\Formatter": "src/"
 		}
 	},
