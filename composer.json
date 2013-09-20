@@ -1,5 +1,5 @@
 {
-	"name": "hitsend/formatter",
+	"name": "hitsend/laravel-formatter",
 	"type": "library",
 	"description": "Port of Daniel Berry's Formatter Bundle for Laravel 3, to Laravel 4 using the Composer Package management",
 	"keywords": ["laravel", "formatter"],
@@ -19,7 +19,7 @@
 	"autoload": {
 		"psr-0": {
 			"Spyc": "vendor/spyc/",
-			"Hitsend\\Formatter": "src/"
+			"Formatter": "src/"
 		}
 	},
 	"minimum-stability": "dev"
