@@ -8,13 +8,20 @@ I've also implemented the error handling code created by @rodrigore
 Installation
 ------------
 
-Not exactly sure... I used the Artisan Workbench to create a package in my Laravel 4 instance.
+Begin by installing this package through Composer. Edit your project's `composer.json` file to require `hitsend/laravel-formatter`.
 
-To learn more about packages read http://laravel.com/docs/packages
+	"require": {
+		"hitsend/laravel-formatter": "dev-master"
+	}
 
-when you add this to your vendor directory, you will need to run `php artisan dump-autoload`
+Next, update Composer from the Terminal:
 
-I'll try to make this installation better once I get more time.
+    composer update
+
+Once this operation completes, the final step is to add the service provider. Open `app/config/app.php`, and add a new item to the providers array.
+
+    'Hitsend\Formatter\FormatterServiceProvider'
+
 
 Usage
 -----
@@ -40,11 +47,11 @@ Formatter::make($data_to_convert, 'type of data')->to_the_format_you_want();
 
 ```
 $json_string = '{"foo":"bar","baz":"qux"}';
-$result = Formater::make($json_string, 'json')->to_array();
+$result = Formatter::make($json_string, 'json')->to_array();
 
 if ( empty(Formatter::$errors) ) {
 	//show the results
-	print_r(result);
+	print_r($result);
 } else {
 	// Show the errors
 	print_r(Formatter::$errors);
