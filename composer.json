@@ -1,5 +1,5 @@
 {
-	"name": "SoapBox/laravel-formatter",
+	"name": "soapbox/laravel-formatter",
 	"type": "library",
 	"description": "A Laravel 4 formatting library. Convert data output between XML/CSV/JSON/TXT/YAML/etc. The project builds on the work of Daniel Berry's Laravel 3 Formatter Bundle.",
 	"keywords": ["laravel", "formatter", "data","convert","csv", "xml", "yaml"],

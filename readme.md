@@ -11,7 +11,7 @@ Installation
 Begin by installing this package through Composer. Edit your project's `composer.json` file to require `SoapBox/laravel-formatter`.
 
 	"require": {
-		"SoapBox/laravel-formatter": "dev-master"
+		"soapbox/laravel-formatter": "dev-master"
 	}
 
 Next, update Composer from the Terminal:
