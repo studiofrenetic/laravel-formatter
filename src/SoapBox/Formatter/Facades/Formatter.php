@@ -1,4 +1,4 @@
-<?php namespace Hitsend\Formatter\Facades;
+<?php namespace SoapBox\Formatter\Facades;
 
 use Illuminate\Support\Facades\Facade;
 

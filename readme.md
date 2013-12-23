@@ -8,10 +8,10 @@ I've also implemented the error handling code created by @rodrigore
 Installation
 ------------
 
-Begin by installing this package through Composer. Edit your project's `composer.json` file to require `hitsend/laravel-formatter`.
+Begin by installing this package through Composer. Edit your project's `composer.json` file to require `SoapBox/laravel-formatter`.
 
 	"require": {
-		"hitsend/laravel-formatter": "dev-master"
+		"SoapBox/laravel-formatter": "dev-master"
 	}
 
 Next, update Composer from the Terminal:
@@ -20,7 +20,7 @@ Next, update Composer from the Terminal:
 
 Once this operation completes, the final step is to add the service provider. Open `app/config/app.php`, and add a new item to the providers array.
 
-    'Hitsend\Formatter\FormatterServiceProvider'
+    'SoapBox\Formatter\FormatterServiceProvider'
 
 
 Usage

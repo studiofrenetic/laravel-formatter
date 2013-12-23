@@ -1,4 +1,4 @@
-<?php namespace Hitsend\Formatter;
+<?php namespace SoapBox\Formatter;
 
 use Illuminate\Support\ServiceProvider;
 
@@ -17,7 +17,7 @@ class FormatterServiceProvider extends ServiceProvider {
 	 * @return void
 	 */
 	public function boot() {
-		$this->package('hitsend/formatter');
+		$this->package('SoapBox/formatter');
 	}
 
 	/**
@@ -32,7 +32,7 @@ class FormatterServiceProvider extends ServiceProvider {
 
 		$this->app->booting(function() {
 			$loader = \Illuminate\Foundation\AliasLoader::getInstance();
-			$loader->alias('Formatter', 'Hitsend\Formatter\Facades\Formatter');
+			$loader->alias('Formatter', 'SoapBox\Formatter\Facades\Formatter');
 		});
 	}
 

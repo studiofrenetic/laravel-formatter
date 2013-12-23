@@ -17,7 +17,7 @@
  * Setup the Formatter namespace
  */
 //namespace Formatter;
-namespace Hitsend\Formatter;
+namespace SoapBox\Formatter;
 
 use Config, Lang;
 
