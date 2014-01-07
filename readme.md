@@ -1,9 +1,10 @@
 Formatter Bundle
 ================
 
-Laravel 4 Workbench Package based off the work done by @dberry37388 to create a Laravel 3 Bundle porterd from the FuelPHP Format class.  Thhis class helps you easily convert between various formats such as XML, JSON, CSV, etc...
+A Laravel 4 Formatter Package based on the work done by @dberry37388 with FuelPHP's Formatter class. 
 
-I've also implemented the error handling code created by @rodrigore
+This package will help you to easily convert between various formats such as XML, JSON, CSV, etc...
+
 
 Installation
 ------------
