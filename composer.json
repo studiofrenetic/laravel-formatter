@@ -19,7 +19,7 @@
 	"autoload": {
 		"psr-0": {
 			"Spyc": "src/spyc/",
-			"Hitsend\\Formatter": "src/"
+			"SoapBox\\Formatter": "src/"
 		}
 	},
 	"minimum-stability": "dev"
