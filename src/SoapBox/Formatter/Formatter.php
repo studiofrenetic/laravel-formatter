@@ -19,7 +19,9 @@
 //namespace Formatter;
 namespace SoapBox\Formatter;
 
-use Config, Lang;
+//use Config, Lang;
+use Illuminate\Support\Facades\Config;
+use Illuminate\Support\Facades\Lang;
 
 /**
  * The Formatter Class
@@ -54,7 +56,6 @@ class Formatter {
 	{
 		return new self($data, $from_type, $attributes);
 	}
-
 
 	/**
 	 * Should not be called directly. You should be using Formatter::make()
