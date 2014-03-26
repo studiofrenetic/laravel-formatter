@@ -1,10 +1,11 @@
 {
 	"name": "soapbox/laravel-formatter",
 	"type": "library",
-	"description": "A Laravel 4 formatting library. Convert data output between XML/CSV/JSON/TXT/YAML/etc. The project builds on the work of Daniel Berry's Laravel 3 Formatter Bundle.",
+	"description": "A Laravel 4 formatting library that converts data output between XML, CSV, JSON, TXT, YAML and a few others. ",
 	"keywords": ["laravel", "formatter", "data","convert","csv", "xml", "yaml"],
     "homepage": "http://github.com/SoapBox/laravel-formatter",
     "license": "MIT",
+	"version": "1.1",
 	"authors": [
 		{
 			"name": "Graham McCarthy",
@@ -14,7 +15,16 @@
 	],
 	"require": {
 		"php": ">=5.3.0",
-		"illuminate/support": "4.*"
+		"illuminate/support": ">=4.0,<4.2",
+		"illuminate/foundation": ">=4.0,<4.2",
+		"illuminate/config": ">=4.0,<4.2",
+		"illuminate/session": ">=4.0,<4.2",
+		"illuminate/filesystem": ">=4.0,<4.2",
+		"illuminate/view": ">=4.0,<4.2"
+	},
+	"require-dev": {
+		"orchestra/testbench": "2.1.*",
+		"mockery/mockery": "dev-master"
 	},
 	"autoload": {
 		"psr-0": {
