@@ -370,7 +370,6 @@ class Formatter {
 
 		foreach ($rows as $row) {
 			$data_fields = str_replace($escape.$enclosure, $enclosure, str_getcsv($row, $delimiter, $enclosure, $escape));
-
 			if (count($data_fields) > count($headings)) {
 				array_push(self::$errors, Lang::get('formatter::formatter.more_data', array('line_number' => $line_number ) ));
 			} else if (count($data_fields) < count($headings)) {
@@ -378,6 +377,10 @@ class Formatter {
 			} else {
 				$data[] = array_combine($headings, $data_fields);
 			}
+		}
+
+		if(empty($rows) && !empty($headings) && count($headings) > 0) {
+			$data = $headings;
 		}
 
 		return $data;
