@@ -368,12 +368,12 @@ class Formatter {
 		// Get the headings
 		$headings = str_replace($escape.$enclosure, $enclosure, str_getcsv(array_shift($rows), $delimiter, $enclosure, $escape));
 
-		foreach ($rows as $row) {
+		foreach ($rows as $line_number => $row) {
 			$data_fields = str_replace($escape.$enclosure, $enclosure, str_getcsv($row, $delimiter, $enclosure, $escape));
 			if (count($data_fields) > count($headings)) {
-				array_push(self::$errors, Lang::get('formatter::formatter.more_data', array('line_number' => $line_number ) ));
+				array_push(self::$errors, Lang::get('formatter::formatter.more_data', array('line_number' => $line_number + 1) ));
 			} else if (count($data_fields) < count($headings)) {
-				array_push(self::$errors, Lang::get('formatter::formatter.less_data', array('line_number' => $line_number ) ));
+				array_push(self::$errors, Lang::get('formatter::formatter.less_data', array('line_number' => $line_number + 1) ));
 			} else {
 				$data[] = array_combine($headings, $data_fields);
 			}
@@ -418,5 +418,14 @@ class Formatter {
 			}
 		}
 		return false;
+	}
+
+	/**
+	 * Returns with errors
+	 * @return array
+	 */
+	public function errors()
+	{
+		return self::$errors;
 	}
 }
