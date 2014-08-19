@@ -164,6 +164,7 @@ class Formatter {
 			} else {
 				$headings = array_shift($data);
 			}
+
 		}
 		// Single array
 		else {
@@ -210,7 +211,7 @@ class Formatter {
 		// To allow exporting ArrayAccess objects like Orm\Model instances they need to be
 		// converted to an array first
 		$data = (is_array($data) or is_object($data)) ? $this->to_array($data) : $data;
-		return $pretty ? static::pretty_json($data) : json_encode($data, JSON_NUMERIC_CHECK);
+		return $pretty ? static::pretty_json($data) : json_encode($data);
 	}
 
 	/**

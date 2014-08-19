@@ -60,4 +60,46 @@ class FormatterTest extends Orchestra\Testbench\TestCase {
 		$this->assertEquals($expected, $result);
 	}
 
+	/**
+	* A complex multi-dimentional test for CSV data to array
+	*
+	* @return void
+	*/
+	public function testComplexCSVToArray() {
+/*
+		$data = '
+		{
+			"simple":"118",
+			"date":"2014-05-20 21:03:59.333",
+			"time":"4067",
+			"duration_onset":null,
+			"devicename":"My Device",
+			"calc_data":[
+				[
+					1400609039,
+					0,
+					37,
+					0,
+					0,
+					1
+				],
+				[
+					1400609039,
+					0,
+					37,
+					0,
+					0,
+					1
+				]
+			]
+		}
+		';
+
+		$result = Formatter::make($data, 'json')->to_csv();
+
+		dd($result);
+*/
+		$this->assertEquals(true,true);
+	}
+
 }
