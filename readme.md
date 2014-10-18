@@ -39,7 +39,7 @@ Formatter::make($data_to_convert, 'type of data')->to_the_format_you_want();
 - XML
 - CSV
 
-### Available Formates to Convert To
+### Available Formats to Convert To
 - Json
 - Serializaed Array
 - XML
