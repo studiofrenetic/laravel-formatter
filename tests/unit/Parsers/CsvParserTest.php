@@ -6,6 +6,9 @@ use SoapBox\Formatter\Parsers\CsvParser;
 
 class CsvParserTest extends TestCase {
 
+	private $simpleCsv = 'foo,boo
+bar,far';
+
 	public function testCsvParserIsInstanceOfParserInterface() {
 		$parser = new CsvParser('');
 		$this->assertTrue($parser instanceof ParserInterface);
@@ -20,11 +23,13 @@ class CsvParserTest extends TestCase {
 
 	public function testtoArrayReturnsCsvArrayRepresentation() {
 		$expected = [['foo' => 'bar', 'boo' => 'far']];
-
-		$csv = 'foo,boo
-bar,far';
-		$parser = new CsvParser($csv);
-
+		$parser = new CsvParser($this->simpleCsv);
 		$this->assertEquals($expected, $parser->toArray());
+	}
+
+	public function testtoJsonReturnsJsonRepresentationOfNamedArray() {
+		$expected = '[{"foo":"bar","boo":"far"}]';
+		$parser = new CsvParser($this->simpleCsv);
+		$this->assertEquals($expected, $parser->toJson());
 	}
 }

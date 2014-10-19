@@ -38,4 +38,15 @@ class ArrayParserTest extends TestCase {
 		$this->assertTrue(is_array($parser->toArray()));
 	}
 
+	public function testtoJsonReturnsJsonRepresentationOfArray() {
+		$expected = '[0,1,2]';
+		$parser = new ArrayParser([0, 1, 2]);
+		$this->assertEquals($expected, $parser->toJson());
+	}
+
+	public function testtoJsonReturnsJsonRepresentationOfNamedArray() {
+		$expected = '{"foo":"bar"}';
+		$parser = new ArrayParser(['foo' => 'bar']);
+		$this->assertEquals($expected, $parser->toJson());
+	}
 }

@@ -16,4 +16,10 @@ class XmlParserTest extends TestCase {
 		$parser = new XmlParser('<xml><foo>bar</foo></xml>');
 		$this->assertEquals($expected, $parser->toArray());
 	}
+
+	public function testtoJsonReturnsJsonRepresentationOfXmlObject() {
+		$expected = '{"foo":"bar"}';
+		$parser = new XmlParser('<xml><foo>bar</foo></xml>');
+		$this->assertEquals($expected, $parser->toJson());
+	}
 }
