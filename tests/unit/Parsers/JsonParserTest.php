@@ -11,4 +11,10 @@ class JsonParserTest extends TestCase {
 		$this->assertTrue($parser instanceof ParserInterface);
 	}
 
+	public function testtoArrayReturnsArrayRepresentationOfJsonObject() {
+		$expected = ['foo' => 'bar'];
+		$parser = new JsonParser('{"foo": "bar"}');
+		$this->assertEquals($expected, $parser->toArray());
+	}
+
 }

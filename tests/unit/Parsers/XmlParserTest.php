@@ -11,4 +11,9 @@ class XmlParserTest extends TestCase {
 		$this->assertTrue($parser instanceof ParserInterface);
 	}
 
+	public function testtoArrayReturnsArrayRepresenationOfXmlObject() {
+		$expected = ['foo' => 'bar'];
+		$parser = new XmlParser('<xml><foo>bar</foo></xml>');
+		$this->assertEquals($expected, $parser->toArray());
+	}
 }

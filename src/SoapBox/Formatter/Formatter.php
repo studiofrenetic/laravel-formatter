@@ -53,4 +53,8 @@ class Formatter {
 	private function __construct($parser) {
 		$this->parser = $parser;
 	}
+
+	public function toJson() {
+		return $this->parser->toJson();
+	}
 }

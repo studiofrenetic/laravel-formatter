@@ -1,6 +1,6 @@
 <?php namespace SoapBox\Formatter\Parsers;
 
-class XmlParser implements ParserInterface {
+class XmlParser extends ParserInterface {
 
 	private $xml;
 
@@ -30,4 +30,7 @@ class XmlParser implements ParserInterface {
 		$this->xml = $this->objectify($data);
 	}
 
+	public function toArray() {
+		return (array) $this->xml;
+	}
 }

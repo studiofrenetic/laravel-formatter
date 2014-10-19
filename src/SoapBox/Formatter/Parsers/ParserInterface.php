@@ -6,13 +6,29 @@
  * This interface describes the abilities of a parser which is able to transform
  * inputs to the object type.
  */
-interface ParserInterface {
+abstract class ParserInterface {
 
 	/**
 	 * Constructor is used to initialize the parser
 	 *
 	 * @param mixed $data The input sharing a type with the parser
 	 */
-	public function __construct($data);
+	abstract public function __construct($data);
+
+	/**
+	 * Used to retrieve a (php) array representation of the data encapsulated within our Parser.
+	 *
+	 * @return array
+	 */
+	abstract public function toArray();
+
+	/**
+	 * Return a json representation of the data stored in the parser
+	 *
+	 * @return string A json string representing the encapsulated data
+	 */
+	public function toJson() {
+		return json_encode($this->toArray());
+	}
 
 }
