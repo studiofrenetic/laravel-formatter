@@ -1,34 +1,30 @@
 {
 	"name": "soapbox/laravel-formatter",
 	"type": "library",
-	"description": "A Laravel 4 formatting library that converts data output between XML, CSV, JSON, TXT, YAML and a few others. ",
-	"keywords": ["laravel", "formatter", "data","convert","csv", "xml", "yaml"],
+	"description": "A formatting library that converts data output between XML, CSV, JSON, TXT, YAML and a few others.",
+	"keywords": ["laravel", "formatter", "data", "convert", "csv", "xml", "yaml"],
     "homepage": "http://github.com/SoapBox/laravel-formatter",
     "license": "MIT",
-	"version": "1.4",
+	"version": "2.0",
 	"authors": [
 		{
 			"name": "Graham McCarthy",
 			"email": "graham@soapboxhq.com",
 			"homepage": "http://grahammccarthy.com"
+		},
+		{
+			"name": "Jaspaul Bola",
+			"email": "jaspaul.b@gamil.com",
+			"homepage": "http://jaspaulbola.com"
 		}
 	],
 	"require": {
 		"php": ">=5.3.0",
 		"illuminate/support": ">=4.0",
-		"illuminate/foundation": ">=4.0",
-		"illuminate/config": ">=4.0",
-		"illuminate/session": ">=4.0",
-		"illuminate/filesystem": ">=4.0",
-		"illuminate/view": ">=4.0"
-	},
-	"require-dev": {
-		"orchestra/testbench": "2.1.*",
-		"mockery/mockery": "dev-master"
+		"illuminate/config": ">=4.0"
 	},
 	"autoload": {
 		"psr-0": {
-			"Spyc": "src/spyc/",
 			"SoapBox\\Formatter": "src/"
 		}
 	},
