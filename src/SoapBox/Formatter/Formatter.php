@@ -62,4 +62,16 @@ class Formatter {
 	public function toJson() {
 		return $this->parser->toJson();
 	}
+
+	public function toArray() {
+		return $this->parser->toArray();
+	}
+
+	public function toYaml() {
+		return $this->parser->toYaml();
+	}
+
+	public function toXml() {
+		return $this->parser->toXml();
+	}
 }
