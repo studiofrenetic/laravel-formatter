@@ -1,5 +1,7 @@
 <?php namespace SoapBox\Formatter\Parsers;
 
+use Spyc;
+
 /**
  * Parser Interface
  *
@@ -31,4 +33,12 @@ abstract class ParserInterface {
 		return json_encode($this->toArray());
 	}
 
+	/**
+	 * Return a yaml representation of the data stored in the parser
+	 *
+	 * @return string A yaml string representing the encapsulated data
+	 */
+	public function toYaml() {
+		return Spyc::YAMLDump($this->toArray());
+	}
 }

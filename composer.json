@@ -20,7 +20,8 @@
 	],
 	"require": {
 		"php": ">=5.3.0",
-		"league/csv": "~6.0"
+		"league/csv": "~6.0",
+		"mustangostang/spyc": "0.5.*@dev"
 	},
 	"autoload": {
 		"psr-0": {
