@@ -3,7 +3,7 @@
 use InvalidArgumentException;
 use Spyc;
 
-class YamlParser extends ParserInterface {
+class YamlParser extends Parser {
 
 	private $array;
 

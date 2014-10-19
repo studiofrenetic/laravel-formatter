@@ -3,7 +3,7 @@
 use InvalidArgumentException;
 use League\Csv\Reader;
 
-class CsvParser extends ParserInterface {
+class CsvParser extends Parser {
 
 	private $csv;
 

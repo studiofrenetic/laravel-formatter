@@ -1,6 +1,6 @@
 <?php namespace SoapBox\Formatter\Parsers;
 
-class XmlParser extends ParserInterface {
+class XmlParser extends Parser {
 
 	private $xml;
 

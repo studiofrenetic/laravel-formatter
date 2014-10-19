@@ -9,7 +9,7 @@ use Str;
  * This interface describes the abilities of a parser which is able to transform
  * inputs to the object type.
  */
-abstract class ParserInterface {
+abstract class Parser {
 
 	/**
 	 * Constructor is used to initialize the parser

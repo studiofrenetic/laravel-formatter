@@ -2,14 +2,14 @@
 
 use stdClass;
 use SoapBox\Formatter\Test\TestCase;
-use SoapBox\Formatter\Parsers\ParserInterface;
+use SoapBox\Formatter\Parsers\Parser;
 use SoapBox\Formatter\Parsers\ArrayParser;
 
 class ArrayParserTest extends TestCase {
 
 	public function testArrayParserIsInstanceOfParserInterface() {
 		$parser = new ArrayParser(new \stdClass);
-		$this->assertTrue($parser instanceof ParserInterface);
+		$this->assertTrue($parser instanceof Parser);
 	}
 
 	public function testConstructorAcceptsSerializedArray() {

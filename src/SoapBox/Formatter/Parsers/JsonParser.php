@@ -1,6 +1,6 @@
 <?php namespace SoapBox\Formatter\Parsers;
 
-class JsonParser extends ParserInterface {
+class JsonParser extends Parser {
 
 	private $json;
 

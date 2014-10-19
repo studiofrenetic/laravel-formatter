@@ -2,7 +2,7 @@
 
 use InvalidArgumentException;
 
-class ArrayParser extends ParserInterface {
+class ArrayParser extends Parser {
 
 	private $array;
 
