@@ -1,6 +1,10 @@
 <?php namespace SoapBox\Formatter;
 
 use InvalidArgumentException;
+use SoapBox\Formatter\Parsers\ArrayParser;
+use SoapBox\Formatter\Parsers\CsvParser;
+use SoapBox\Formatter\Parsers\JsonParser;
+use SoapBox\Formatter\Parsers\XmlParser;
 
 class Formatter {
 	/**
@@ -12,6 +16,7 @@ class Formatter {
 	const Arr  = 'array';
 
 	private static $supportedTypes = [self::Csv, self::Json, self::Xml, self::Arr];
+	private $parser;
 
 	/**
 	 * Make: Returns an instance of formatter initialized with data and type
@@ -24,20 +29,20 @@ class Formatter {
 	public static function make($data, $type) {
 		if (in_array($type, self::$supportedTypes)) {
 			$parser = null;
-			// switch ($type) {
-			// 	case self::Csv:
-			// 		$parser = new CsvParser($data);
-			// 		break;
-			// 	case self::Json:
-			// 		$parser = new JsonParser($data);
-			// 		break;
-			// 	case self::Xml:
-			// 		$parser = new XmlParser($data);
-			// 		break;
-			// 	case self::Arr:
-			// 		$parser = new ArrayParser($data);
-			// 		break;
-			// }
+			switch ($type) {
+				case self::Csv:
+					$parser = new CsvParser($data);
+					break;
+				case self::Json:
+					$parser = new JsonParser($data);
+					break;
+				case self::Xml:
+					$parser = new XmlParser($data);
+					break;
+				case self::Arr:
+					$parser = new ArrayParser($data);
+					break;
+			}
 			return new Formatter($parser, $type);
 		}
 		throw new InvalidArgumentException(
@@ -45,7 +50,7 @@ class Formatter {
 		);
 	}
 
-	private function __construct($parser, $type) {
-
+	private function __construct($parser) {
+		$this->parser = $parser;
 	}
 }
