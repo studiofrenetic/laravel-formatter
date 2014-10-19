@@ -10,12 +10,12 @@ class Formatter {
 	/**
 	 * Add class constants that help define input format
 	 */
-	const Csv  = 'csv';
-	const Json = 'json';
-	const Xml  = 'xml';
-	const Arr  = 'array';
+	const CSV  = 'csv';
+	const JSON = 'json';
+	const XML  = 'xml';
+	const ARR  = 'array';
 
-	private static $supportedTypes = [self::Csv, self::Json, self::Xml, self::Arr];
+	private static $supportedTypes = [self::CSV, self::JSON, self::XML, self::ARR];
 	private $parser;
 
 	/**
@@ -30,16 +30,16 @@ class Formatter {
 		if (in_array($type, self::$supportedTypes)) {
 			$parser = null;
 			switch ($type) {
-				case self::Csv:
+				case self::CSV:
 					$parser = new CsvParser($data);
 					break;
-				case self::Json:
+				case self::JSON:
 					$parser = new JsonParser($data);
 					break;
-				case self::Xml:
+				case self::XML:
 					$parser = new XmlParser($data);
 					break;
-				case self::Arr:
+				case self::ARR:
 					$parser = new ArrayParser($data);
 					break;
 			}
