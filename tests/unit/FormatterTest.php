@@ -32,6 +32,13 @@ class FormatterTest extends TestCase {
 		$this->assertEquals($expected, $actual);
 	}
 
+	public function testFormatterProvidesYamlConstant() {
+		$expected = 'yaml';
+		$actual = Formatter::YAML;
+
+		$this->assertEquals($expected, $actual);
+	}
+
     /**
      * @expectedException InvalidArgumentException
      */

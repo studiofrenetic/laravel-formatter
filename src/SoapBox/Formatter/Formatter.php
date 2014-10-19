@@ -5,6 +5,7 @@ use SoapBox\Formatter\Parsers\ArrayParser;
 use SoapBox\Formatter\Parsers\CsvParser;
 use SoapBox\Formatter\Parsers\JsonParser;
 use SoapBox\Formatter\Parsers\XmlParser;
+use SoapBox\Formatter\Parsers\YamlParser;
 
 class Formatter {
 	/**
@@ -14,8 +15,9 @@ class Formatter {
 	const JSON = 'json';
 	const XML  = 'xml';
 	const ARR  = 'array';
+	const YAML = 'yaml';
 
-	private static $supportedTypes = [self::CSV, self::JSON, self::XML, self::ARR];
+	private static $supportedTypes = [self::CSV, self::JSON, self::XML, self::ARR, self::YAML];
 	private $parser;
 
 	/**
@@ -41,6 +43,9 @@ class Formatter {
 					break;
 				case self::ARR:
 					$parser = new ArrayParser($data);
+					break;
+				case self::YAML:
+					$parser = new YamlParser($data);
 					break;
 			}
 			return new Formatter($parser, $type);
