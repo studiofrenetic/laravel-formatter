@@ -11,6 +11,8 @@ class Formatter {
 	const Xml  = 'xml';
 	const Arr  = 'array';
 
+	private static $supportedTypes = [self::Csv, self::Json, self::Xml, self::Arr];
+
 	/**
 	 * Make: Returns an instance of formatter initialized with data and type
 	 *
@@ -20,8 +22,15 @@ class Formatter {
 	 * @return Formatter
 	 */
 	public static function make($data, $type) {
+		if (in_array($type, self::$supportedTypes)) {
+			return new Formatter($data, $type);
+		}
 		throw new InvalidArgumentException(
 			'make function only accepts [csv, json, xml, array] for $type but ' . $type . ' was provided.'
 		);
+	}
+
+	private function __construct($data, $type) {
+
 	}
 }

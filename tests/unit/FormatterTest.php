@@ -39,4 +39,9 @@ class FormatterTest extends TestCase {
 		$formatter = Formatter::make('', 'blue');
 	}
 
+	public function testFormatterMakeReturnsInstanceOfFormatter() {
+		$formatter = Formatter::make('', Formatter::Csv);
+		$this->assertTrue($formatter instanceof Formatter);
+	}
+
 }
