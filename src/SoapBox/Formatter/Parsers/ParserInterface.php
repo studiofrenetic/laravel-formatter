@@ -15,11 +15,4 @@ interface ParserInterface {
 	 */
 	public function __construct($data);
 
-	/**
-	 * asObject takes in $data and transforms it into a php object
-	 *
-	 * @return stdClass An object representation of the input data.
-	 */
-	public function asObject();
-
 }

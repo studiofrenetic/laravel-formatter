@@ -1,12 +1,13 @@
 <?php namespace SoapBox\Formatter\Parsers;
 
+use League\Csv\Reader;
+
 class CsvParser implements ParserInterface {
 
-	public function __construct($data) {
-		$this->data = $data;
-	}
+	private $csv;
 
-	public function asObject() {
+	public function __construct($data) {
+		$this->csv = Reader::createFromString($data);
 	}
 
 }

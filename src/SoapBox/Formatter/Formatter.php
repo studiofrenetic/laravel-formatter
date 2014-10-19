@@ -23,14 +23,29 @@ class Formatter {
 	 */
 	public static function make($data, $type) {
 		if (in_array($type, self::$supportedTypes)) {
-			return new Formatter($data, $type);
+			$parser = null;
+			// switch ($type) {
+			// 	case self::Csv:
+			// 		$parser = new CsvParser($data);
+			// 		break;
+			// 	case self::Json:
+			// 		$parser = new JsonParser($data);
+			// 		break;
+			// 	case self::Xml:
+			// 		$parser = new XmlParser($data);
+			// 		break;
+			// 	case self::Arr:
+			// 		$parser = new ArrayParser($data);
+			// 		break;
+			// }
+			return new Formatter($parser, $type);
 		}
 		throw new InvalidArgumentException(
 			'make function only accepts [csv, json, xml, array] for $type but ' . $type . ' was provided.'
 		);
 	}
 
-	private function __construct($data, $type) {
+	private function __construct($parser, $type) {
 
 	}
 }
