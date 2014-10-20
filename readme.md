@@ -21,9 +21,9 @@ Through composer.json:
 
 ```json
 {
-	"require": {
-		"soapbox/laravel-formatter": "2.x"
-	}
+  "require": {
+    "soapbox/laravel-formatter": "2.x"
+  }
 }
 
 ```
@@ -95,3 +95,4 @@ __PHP Export__
 ```php
 $export = var_export($formatter->toArray());
 ```
+
