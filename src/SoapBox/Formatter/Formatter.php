@@ -74,4 +74,8 @@ class Formatter {
 	public function toXml() {
 		return $this->parser->toXml();
 	}
+
+	public function toCsv() {
+		return $this->parser->toCsv();
+	}
 }

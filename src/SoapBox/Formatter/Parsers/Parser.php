@@ -1,7 +1,7 @@
 <?php namespace SoapBox\Formatter\Parsers;
 
 use Spyc;
-use Str;
+use Illuminate\Support\Str;
 use SoapBox\Formatter\ArrayHelpers;
 
 /**
@@ -141,8 +141,13 @@ abstract class Parser {
 		}
 
 		$output = '';
+		$count = 0;
 		foreach ($result as $row) {
-			$output .= implode(',', $row) . "\r\n";
+			if ($count != 0) {
+				$output .=  "\r\n";
+			}
+			$count++;
+			$output .= implode(',', $row);
 		}
 
 		return $output;

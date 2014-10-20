@@ -22,18 +22,21 @@ class CsvParser extends Parser {
 		$temp = $this->csv->jsonSerialize();
 
 		$headings = $temp[0];
+		$result = $headings;
 
-		$result = [];
-		for ($i = 1; $i < count($temp); ++$i) {
-			$row = [];
-			for ($j = 0; $j < count($headings); ++$j) {
-				$row[$headings[$j]] = $temp[$i][$j];
+		if (count($temp) > 1) {
+			$result = [];
+			for ($i = 1; $i < count($temp); ++$i) {
+				$row = [];
+				for ($j = 0; $j < count($headings); ++$j) {
+					$row[$headings[$j]] = $temp[$i][$j];
+				}
+				$expanded = [];
+				foreach ($row as $key => $value) {
+					ArrayHelpers::set($expanded, $key, $value);
+				}
+				$result[] = $expanded;
 			}
-			$expanded = [];
-			foreach ($row as $key => $value) {
-				ArrayHelpers::set($expanded, $key, $value);
-			}
-			$result[] = $expanded;
 		}
 
 		return $result;
