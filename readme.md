@@ -6,7 +6,8 @@ Formatter Bundle
 A formatter package that will help you to easily convert between various formats such as XML, JSON, CSV, etc...
 
 # Goals
-The goals of this library to to allow the transfomation of data formats from one type to another. See Parsers and Formats to see supported input / output formats.
+The goals of this library are to allow the transfomation of data formats from one type to another.
+See Parsers and Formats to see supported input / output formats.
 
 # Installation
 
@@ -43,7 +44,7 @@ All of the following are formats that are supported for output.
 * XML
 * YAML
 
-## General Usage (See tests for most up to date examples)
+## General Usage
 
 __Including The Formatter__
 
@@ -61,20 +62,23 @@ Formatter::ARR;  //array
 Formatter::YAML; //yaml
 ```
 
-__Making Your First Formatter__
+__Making Your First Formatter(s)__
 
 ```php
 $formatter = Formatter::make($jsonString, Formatter::JSON);
+$formatter = Formatter::make($yamlString, Formatter::YAML);
+$formatter = Formatter::make($array, Formatter::ARR);
+...
 ```
 
 __Outputting From Your Formatter__
 
 ```php
-$csv = $formatter->toCsv();
-$json = $formatter->toJson();
-$xml = $formatter->toXml();
+$csv   = $formatter->toCsv();
+$json  = $formatter->toJson();
+$xml   = $formatter->toXml();
 $array = $formatter->toArray();
-$yaml = $formatter->toYaml();
+$yaml  = $formatter->toYaml();
 ```
 
 ## Deprecated Functionality
