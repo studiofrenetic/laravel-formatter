@@ -2,6 +2,7 @@
 
 use Spyc;
 use Str;
+use SoapBox\Formatter\ArrayHelpers;
 
 /**
  * Parser Interface
@@ -111,9 +112,39 @@ abstract class Parser {
 		return $this->xmlify($this->toArray());
 	}
 
+	private function csvify($data) {
+		$results = [];
+		foreach ($data as $row) {
+			$results[] = array_values(ArrayHelpers::dot($row));
+		}
+		return $results;
+	}
+
 	/**
 	 * Return a csv representation of the data stored in the parser
 	 *
-	 * @return string An xml string representing the encapsulated data
+	 * @return string An csv string representing the encapsulated data
 	 */
+	public function toCsv() {
+		$data = $this->toArray();
+
+		if (ArrayHelpers::isAssociative($data) || !is_array($data[0])) {
+			$data = [$data];
+		}
+
+		$result = [];
+
+		$result[] = ArrayHelpers::dotKeys($data[0]);
+
+		foreach ($data as $row) {
+			$result[] = array_values(ArrayHelpers::dot($row));
+		}
+
+		$output = '';
+		foreach ($result as $row) {
+			$output .= implode(',', $row) . "\r\n";
+		}
+
+		return $output;
+	}
 }

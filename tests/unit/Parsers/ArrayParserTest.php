@@ -49,4 +49,9 @@ class ArrayParserTest extends TestCase {
 		$parser = new ArrayParser(['foo' => 'bar']);
 		$this->assertEquals($expected, $parser->toJson());
 	}
+
+	public function testFunTimes() {
+		$parser = new ArrayParser([[0,1,2], [2,3,4]]);
+		var_dump($parser->toCsv());
+	}
 }
