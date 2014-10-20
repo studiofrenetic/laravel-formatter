@@ -32,4 +32,5 @@ bar,far';
 		$parser = new CsvParser($this->simpleCsv);
 		$this->assertEquals($expected, $parser->toJson());
 	}
+
 }
