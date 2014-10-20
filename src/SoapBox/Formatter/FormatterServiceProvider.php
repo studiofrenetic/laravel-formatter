@@ -2,6 +2,9 @@
 
 use Illuminate\Support\ServiceProvider;
 
+/**
+ * Used to register Authroize with service providers, mainly for Laravel.
+ */
 class FormatterServiceProvider extends ServiceProvider {
 
 	/**
@@ -17,7 +20,7 @@ class FormatterServiceProvider extends ServiceProvider {
 	 * @return void
 	 */
 	public function boot() {
-		$this->package('SoapBox/formatter');
+		$this->package('soapbox/laravel-formatter');
 	}
 
 	/**
@@ -26,14 +29,6 @@ class FormatterServiceProvider extends ServiceProvider {
 	 * @return void
 	 */
 	public function register() {
-		$this->app['formatter'] = $this->app->share(function($app) {
-			return new Formatter;
-		});
-
-		$this->app->booting(function() {
-			$loader = \Illuminate\Foundation\AliasLoader::getInstance();
-			$loader->alias('Formatter', 'SoapBox\Formatter\Facades\Formatter');
-		});
 	}
 
 	/**
@@ -42,7 +37,7 @@ class FormatterServiceProvider extends ServiceProvider {
 	 * @return array
 	 */
 	public function provides() {
-		return array('formatter');
+		return array();
 	}
 
 }

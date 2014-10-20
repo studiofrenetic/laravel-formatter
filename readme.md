@@ -3,69 +3,96 @@ Formatter Bundle
 
 [![Build Status](https://travis-ci.org/SoapBox/laravel-formatter.svg?branch=master)](https://travis-ci.org/SoapBox/laravel-formatter)
 
-A Laravel 4 Formatter Package based on the work done by @dberry37388 with FuelPHP's Formatter class.
+A formatter package that will help you to easily convert between various formats such as XML, JSON, CSV, etc...
 
-This package will help you to easily convert between various formats such as XML, JSON, CSV, etc...
+# Goals
+The goals of this library are to allow the transfomation of data formats from one type to another.
+See Parsers and Formats to see supported input / output formats.
 
+# Installation
 
-Installation
-------------
+Through command line:
 
-Begin by installing this package through Composer. Edit your project's `composer.json` file to require `SoapBox/laravel-formatter`.
-
-	"require": {
-		"soapbox/laravel-formatter": "dev-master"
-	}
-
-Next, update Composer from the Terminal:
-
-    composer update
-
-Once this operation completes, the final step is to add the service provider. Open `app/config/app.php`, and add a new item to the providers array.
-
-    'SoapBox\Formatter\FormatterServiceProvider'
-
-
-Usage
------
-The best way to learn how to use Formatter is to look through the code, where you can familiarize yourself with all of the available methods.
-
-###Calling Formatter
-Formatter::make($data_to_convert, 'type of data')->to_the_format_you_want();
-
-### Available Formats to Convert From
-- Json
-- Serialized Array
-- XML
-- CSV
-
-### Available Formats to Convert To
-- Json
-- Serializaed Array
-- XML
-- CSV
-- PHP Array
-- PHP Export
-- YAML
-
+```bash
+composer require soapbox/laravel-formatter
 ```
-$json_string = '{"foo":"bar","baz":"qux"}';
-$result = Formatter::make($json_string, 'json')->to_array();
 
-if ( empty(Formatter::$errors) ) {
-	//show the results
-	print_r($result);
-} else {
-	// Show the errors
-	print_r(Formatter::$errors);
-	return;
+Through composer.json:
+
+```json
+{
+  "require": {
+    "soapbox/laravel-formatter": "2.x"
+  }
 }
 
-// Returns
-Array
-(
-    [foo] => bar
-    [baz] => qux
-)
+```
+
+## Parsers
+All of the following are supported formats that the formatter can read from.
+* Array
+* CSV
+* JSON
+* XML
+* YAML
+
+## Formats
+All of the following are formats that are supported for output.
+* Array
+* CSV
+* JSON
+* XML
+* YAML
+
+## General Usage
+
+__Including The Formatter__
+
+```php
+use SoapBox\Formatter\Formatter;
+```
+
+__Supported Types__
+
+```php
+Formatter::JSON; //json
+Formatter::CSV;  //csv
+Formatter::XML;  //xml
+Formatter::ARR;  //array
+Formatter::YAML; //yaml
+```
+
+__Making Your First Formatter(s)__
+
+```php
+$formatter = Formatter::make($jsonString, Formatter::JSON);
+$formatter = Formatter::make($yamlString, Formatter::YAML);
+$formatter = Formatter::make($array, Formatter::ARR);
+...
+```
+
+__Outputting From Your Formatter__
+
+```php
+$csv   = $formatter->toCsv();
+$json  = $formatter->toJson();
+$xml   = $formatter->toXml();
+$array = $formatter->toArray();
+$yaml  = $formatter->toYaml();
+```
+
+## Deprecated Functionality
+The following have been deprecated from the library, however you can easily continue using them in your application
+
+__Serialized Array__
+
+```php
+$serialized = serialize($formatter->toArray());
+```
+
+__PHP Export__
+
+```php
+$export = var_export($formatter->toArray());
 ```
 
