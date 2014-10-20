@@ -2,6 +2,7 @@
 
 use InvalidArgumentException;
 use League\Csv\Reader;
+use SoapBox\Formatter\ArrayHelpers;
 
 class CsvParser extends Parser {
 
@@ -28,7 +29,11 @@ class CsvParser extends Parser {
 			for ($j = 0; $j < count($headings); ++$j) {
 				$row[$headings[$j]] = $temp[$i][$j];
 			}
-			$result[] = $row;
+			$expanded = [];
+			foreach ($row as $key => $value) {
+				ArrayHelpers::set($expanded, $key, $value);
+			}
+			$result[] = $expanded;
 		}
 
 		return $result;

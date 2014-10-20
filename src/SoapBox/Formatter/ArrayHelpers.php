@@ -16,4 +16,8 @@ class ArrayHelpers {
 		return Arr::dot($data);
 	}
 
+	public static function set(array &$data, $key, $value) {
+		Arr::set($data, $key, $value);
+	}
+
 }
