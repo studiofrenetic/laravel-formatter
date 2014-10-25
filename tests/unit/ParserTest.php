@@ -65,7 +65,7 @@ class ParserTest extends TestCase {
 	}
 
 	public function testMultiDimensionalArrayFromJsonToCsv() {
-		$expected = "simple,date,time,duration_onset,devicename,calc_data.0.0,calc_data.0.1,calc_data.0.2,calc_data.0.3,calc_data.0.4,calc_data.0.5,calc_data.1.0,calc_data.1.1,calc_data.1.2,calc_data.1.3,calc_data.1.4,calc_data.1.5\r\n118,2014-05-20 21:03:59.333,4067,,My Device,1400609039,0,37,0,0,1,1400609039,0,37,0,0,1";
+		$expected = "\"simple\",\"date\",\"time\",\"duration_onset\",\"devicename\",\"calc_data.0.0\",\"calc_data.0.1\",\"calc_data.0.2\",\"calc_data.0.3\",\"calc_data.0.4\",\"calc_data.0.5\",\"calc_data.1.0\",\"calc_data.1.1\",\"calc_data.1.2\",\"calc_data.1.3\",\"calc_data.1.4\",\"calc_data.1.5\"\n\"118\",\"2014-05-20 21:03:59.333\",\"4067\",\"\",\"My Device\",\"1400609039\",\"0\",\"37\",\"0\",\"0\",\"1\",\"1400609039\",\"0\",\"37\",\"0\",\"0\",\"1\"";
 
 		$json =
 '{

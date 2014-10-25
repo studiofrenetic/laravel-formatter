@@ -50,4 +50,9 @@ class ArrayParserTest extends TestCase {
 		$this->assertEquals($expected, $parser->toJson());
 	}
 
+	public function testtoCSVFromArrayContainingContentWithCommasWorks() {
+		$expected = "\"0\",\"1\",\"2\",\"3\"\n\"a\",\"b\",\"c,e\",\"d\"";
+		$parser = new ArrayParser(['a','b','c,e','d']);
+		$this->assertEquals($expected, $parser->toCsv());
+	}
 }
