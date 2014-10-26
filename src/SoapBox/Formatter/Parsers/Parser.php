@@ -121,35 +121,45 @@ abstract class Parser {
 	}
 
 	/**
+	 * Ported from laravel-formatter
+	 * https://github.com/SoapBox/laravel-formatter
+	 *
+	 * @author  Daniel Berry <daniel@danielberry.me>
+	 * @license MIT License (see LICENSE.readme included in the bundle)
+	 *
 	 * Return a csv representation of the data stored in the parser
 	 *
 	 * @return string An csv string representing the encapsulated data
 	 */
-	public function toCsv() {
+	public function toCsv($newline = "\n", $delimiter = ",", $enclosure = '"', $escape = "\\") {
 		$data = $this->toArray();
 
 		if (ArrayHelpers::isAssociative($data) || !is_array($data[0])) {
 			$data = [$data];
 		}
 
-		$result = [];
+		$escaper = function($items) use($enclosure, $escape) {
+			return array_map(function($item) use($enclosure, $escape) {
+				return str_replace($enclosure, $escape.$enclosure, $item);
+			}, $items);
+		};
 
-		$result[] = ArrayHelpers::dotKeys($data[0]);
+		$headings = ArrayHelpers::dotKeys($data[0]);
+		$result = [];
 
 		foreach ($data as $row) {
 			$result[] = array_values(ArrayHelpers::dot($row));
 		}
 
-		$output = '';
-		$count = 0;
-		foreach ($result as $row) {
-			if ($count != 0) {
-				$output .=  "\r\n";
-			}
-			$count++;
-			$output .= implode(',', $row);
+		$data = $result;
+
+		$output = $enclosure.implode($enclosure.$delimiter.$enclosure, $escaper($headings)).$enclosure.$newline;
+
+		foreach ($data as $row)
+		{
+			$output .= $enclosure.implode($enclosure.$delimiter.$enclosure, $escaper((array) $row)).$enclosure.$newline;
 		}
 
-		return $output;
+		return rtrim($output, $newline);
 	}
 }
