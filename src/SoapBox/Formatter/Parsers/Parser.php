@@ -106,10 +106,12 @@ abstract class Parser {
 	/**
 	 * Return an xml representation of the data stored in the parser
 	 *
+	 * @param string $baseNode
+	 *
 	 * @return string An xml string representing the encapsulated data
 	 */
-	public function toXml() {
-		return $this->xmlify($this->toArray());
+	public function toXml($baseNode = 'xml') {
+		return $this->xmlify($this->toArray(), null, $baseNode);
 	}
 
 	private function csvify($data) {
