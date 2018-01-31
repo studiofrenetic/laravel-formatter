@@ -9,6 +9,7 @@ Changelog
 - JSON parse fix (Instead of only converting the first level to array, use the associative array parameter with true, so all levels will be decoded to array structure)
 - Add support for laravel 5
 - add package discovery for laravel 5
+- add support delimiter to a csv
 
 Formatter Bundle
 ================

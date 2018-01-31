@@ -6,13 +6,16 @@ use SoapBox\Formatter\ArrayHelpers;
 
 class CsvParser extends Parser
 {
-
     private $csv;
 
-    public function __construct($data)
+    public function __construct($data, $delimiter = null)
     {
         if (is_string($data)) {
             $this->csv = Reader::createFromString($data);
+            if ($delimiter) {
+                $this->csv->setDelimiter($delimiter);
+            }
+            $this->csv->setEnclosure('|');
         } else {
             throw new InvalidArgumentException(
                 'CsvParser only accepts (string) [csv] for $data.'

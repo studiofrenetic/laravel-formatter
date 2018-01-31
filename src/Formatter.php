@@ -29,17 +29,18 @@ class Formatter
     /**
      * Make: Returns an instance of formatter initialized with data and type
      *
-     * @param  mixed       $data The data that formatter should parse
-     * @param  string      $type The type of data formatter is expected to parse
+     * @param  mixed       $data      The data that formatter should parse
+     * @param  string      $type      The type of data formatter is expected to parse
+     * @param  string      $delimiter The delimitation of data formatter to csv
      * @return Formatter
      */
-    public static function make($data, $type)
+    public static function make($data, $type, $delimiter = null)
     {
         if (in_array($type, self::$supportedTypes)) {
             $parser = null;
             switch ($type) {
                 case self::CSV:
-                    $parser = new CsvParser($data);
+                    $parser = new CsvParser($data, $delimiter);
                     break;
                 case self::JSON:
                     $parser = new JsonParser($data);
