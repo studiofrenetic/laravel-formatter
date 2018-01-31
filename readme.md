@@ -1,3 +1,15 @@
+Changelog
+================
+
+- Update composer.json
+- Upgrade to PSR-4
+- add parameter newline, delimiter, enclosure, and escape to export csv
+- When converting a XML to an array, convert @attributes to _attribute_
+- add parameter encoding and formated to export xml
+- JSON parse fix (Instead of only converting the first level to array, use the associative array parameter with true, so all levels will be decoded to array structure)
+- Add support for laravel 5
+- add package discovery for laravel 5
+
 Formatter Bundle
 ================
 
