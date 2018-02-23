@@ -1,19 +1,6 @@
 <?php namespace SoapBox\Formatter;
 
 use Illuminate\Support\ServiceProvider;
-//use Whoops\Exception\Formatter as Formatter;
-//use PhpSpec\Console\Formatter as Formatter;
-//use phpDocumentor\Reflection\DocBlock\Tags\Formatter as Formatter;
-//use Mdanter\Ecc\Serializer\PublicKey\Der\Formatter as Formatter;
-//use Mdanter\Ecc\Serializer\Signature\Der\Formatter as Formatter;
-//use Psy\Formatter\Formatter as Formatter;
-use SoapBox\Formatter\Formatter as Formatter;
-//use Whoops\Exception\Formatter as Formatter;
-//use PhpSpec\Console\Formatter as Formatter;
-//use phpDocumentor\Reflection\DocBlock\Tags\Formatter as Formatter;
-//use Mdanter\Ecc\Serializer\PublicKey\Der\Formatter as Formatter;
-//use Mdanter\Ecc\Serializer\Signature\Der\Formatter as Formatter;
-//use Psy\Formatter\Formatter as Formatter;
 use SoapBox\Formatter\Formatter as Formatter;
 
 /**
@@ -59,5 +46,4 @@ class FormatterServiceProvider extends ServiceProvider
     {
         return ['formatter'];
     }
-
 }
