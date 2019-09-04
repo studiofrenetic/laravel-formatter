@@ -30,11 +30,10 @@ class ArrayParserTest extends TestCase
         $this->assertEquals($expected, $parser->toArray());
     }
 
-    /**
-     * @expectedException InvalidArgumentException
-     */
     public function testArrayParserThrowsExceptionWithInvalidInputOfEmptyString()
     {
+        $this->expectException(\InvalidArgumentException::class);
+
         $parser = new ArrayParser('');
     }
 
