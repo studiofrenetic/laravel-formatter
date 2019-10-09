@@ -1,6 +1,7 @@
 Changelog
 ================
 
+- Update support for Laravel 6 & phpunit 8
 - Update composer.json
 - Upgrade to PSR-4
 - add parameter newline, delimiter, enclosure, and escape to export csv
